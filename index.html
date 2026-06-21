@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>糖尿病控制不良評估</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Diabetes Follow-up Evaluation</p>
+          <h1>糖尿病控制不良評估與追蹤</h1>
+        </div>
+        <div class="top-actions">
+          <button id="saveBtn" class="tool-button" type="button" title="儲存到本機瀏覽器">儲存</button>
+          <button id="exportBtn" class="tool-button" type="button" title="匯出 CSV">匯出</button>
+          <a class="tool-button ghost" href="糖尿病控制不良原因評估表_協作追蹤評值版.xlsx" download>下載 Excel</a>
+        </div>
+      </header>
+
+      <section class="summary-band" aria-label="評估摘要">
+        <div class="summary-item">
+          <span>總分</span>
+          <strong id="totalScore">0.0</strong>
+        </div>
+        <div class="summary-item">
+          <span>等第</span>
+          <strong id="gradeText">未評分</strong>
+        </div>
+        <div class="summary-item">
+          <span>最新改變</span>
+          <strong id="latestChange">無資料</strong>
+        </div>
+        <div class="summary-item">
+          <span>後續評估日</span>
+          <strong id="nextDate">未填寫</strong>
+        </div>
+      </section>
+
+      <div class="layout-grid">
+        <section class="panel patient-panel">
+          <div class="panel-title">
+            <h2>基本資料</h2>
+          </div>
+          <form id="patientForm" class="form-grid">
+            <label>
+              病人姓名
+              <input id="patientName" name="patientName" autocomplete="off" />
+            </label>
+            <label>
+              病歷號
+              <input id="chartNo" name="chartNo" autocomplete="off" />
+            </label>
+            <label>
+              初次評估日期
+              <input id="initialDate" name="initialDate" type="date" />
+            </label>
+            <label>
+              預定後續評估日
+              <input id="plannedFollowDate" name="plannedFollowDate" type="date" />
+            </label>
+            <label>
+              基準 HbA1c (%)
+              <input id="baselineA1c" name="baselineA1c" type="number" min="0" step="0.1" />
+            </label>
+            <label>
+              目標 HbA1c (%)
+              <input id="targetA1c" name="targetA1c" type="number" min="0" step="0.1" />
+            </label>
+            <label class="wide">
+              主要問題
+              <textarea id="primaryIssue" name="primaryIssue" rows="3"></textarea>
+            </label>
+            <label class="wide">
+              醫師初評
+              <textarea id="doctorInitial" name="doctorInitial" rows="3"></textarea>
+            </label>
+            <label class="wide">
+              共同照護目標
+              <textarea id="careGoal" name="careGoal" rows="3"></textarea>
+            </label>
+          </form>
+        </section>
+
+        <section class="panel score-panel">
+          <div class="panel-title">
+            <h2>評值系統</h2>
+          </div>
+          <div id="scoreRows" class="score-list"></div>
+          <div class="decision-box" id="decisionText">請填入各面向評分。</div>
+        </section>
+      </div>
+
+      <section class="panel collaboration-panel">
+        <div class="panel-title">
+          <h2>跨職類協作</h2>
+          <button id="addRoleBtn" class="secondary-button" type="button">新增職類</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>職類</th>
+                <th>人員</th>
+                <th>主要發現</th>
+                <th>改善建議</th>
+                <th>完成狀態</th>
+                <th>醫師評論</th>
+                <th>後續評估日期</th>
+                <th>改變情況</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="roleBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel follow-panel">
+        <div class="panel-title">
+          <h2>追蹤紀錄</h2>
+          <button id="addFollowBtn" class="secondary-button" type="button">新增追蹤</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>本次評估日期</th>
+                <th>後續評估日期</th>
+                <th>追蹤方式</th>
+                <th>空腹血糖</th>
+                <th>飯後血糖</th>
+                <th>HbA1c</th>
+                <th>改變情況</th>
+                <th>達成情形</th>
+                <th>下一步調整</th>
+                <th>醫師評論</th>
+                <th>記錄者</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="followBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="app.js"></script>
+  </body>
+</html>
